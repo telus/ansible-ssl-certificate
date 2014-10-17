@@ -1,0 +1,16 @@
+---
+- name: Install Packages | apt
+  apt:
+    state: latest
+    pkg: "{{ item }}"
+  with_items:
+    - silversearcher-ag
+
+- name: Install Packages | apt
+  apt:
+    state: latest
+    pkg: "{{ item }}"
+  with_items:
+    - emacs24-nox
+    - silversearcher-ag-el
+  when: silversearcher_emacs_integration

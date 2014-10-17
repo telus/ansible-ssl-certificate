@@ -1,0 +1,5 @@
+---
+dependencies:
+  - role: meta/repository
+    repository_key: '0xaec75ad1d1e5d3d2'
+    repository_url: 'deb http://ppa.launchpad.net/mizuno-as/silversearcher-ag/ubuntu trusty main'
