@@ -1,19 +1,10 @@
 ---
-- name: "Does Directory {{ ssl_certificate_path }} exist"
-  shell: "ls {{ ssl_certificate_path }}"
-  ignore_errors: yes
-  register: ssl_certificate_path_ls_message
-  tags:
-    - ssl-certificate
 
 - name: "Create Directory | {{ ssl_certificate_path }}"
   file:
     path: "{{ ssl_certificate_path }}"
     state: directory
-    owner: "{{ ssl_certificate_owner }}"
-    group: "{{ ssl_certificate_group }}"
-    mode: 0755
-  when: ssl_certificate_path_ls_message.stderr
+    mode: 0440
   tags:
     - ssl-certificate
 
