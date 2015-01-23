@@ -4,6 +4,8 @@
   args:
     creates: "{{ ssl_certificate_path_public }}"
   when: ssl_certificate_self_signed
+  tags:
+    - ssl-certificate
 
 - name: Upload Public Certificate
   template:
@@ -13,6 +15,8 @@
     group: "{{ ssl_certificate_group }}"
     mode: 0440
   when: ssl_certificate_public_contents
+  tags:
+    - ssl-certificate
 
 - name: Upload Private Key
   template:
@@ -22,6 +26,8 @@
     group: "{{ ssl_certificate_group }}"
     mode: 0440
   when: ssl_certificate_private_contents
+  tags:
+    - ssl-certificate
 
 - name: Upload Combined Public/Private Key
   template:
@@ -31,3 +37,5 @@
     group: "{{ ssl_certificate_group }}"
     mode: 0440
   when: ssl_certificate_combined
+  tags:
+    - ssl-certificate
