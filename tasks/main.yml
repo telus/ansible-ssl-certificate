@@ -1,4 +1,22 @@
 ---
+- name: "Does Directory {{ ssl_certificate_path }} exist"
+  shell: "ls {{ ssl_certificate_path }}"
+  ignore_errors: yes
+  register: ssl_certificate_path_ls_message
+  tags:
+    - ssl-certificate
+
+- name: "Create Directory | {{ ssl_certificate_path }}"
+  file:
+    path: "{{ ssl_certificate_path }}"
+    state: directory
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+    mode: 0755
+  when: ssl_certificate_path_ls_message.stderr
+  tags:
+    - ssl-certificate
+
 - name: Generate Self-Signed Certificate
   command: openssl req -new -nodes -x509 -subj "/C=CA/ST=BC/L=Vancouver/O=TELUS/CN={{ ssl_certificate_common_name }}" -days 3650 -keyout {{ ssl_certificate_path_private }} -out {{ ssl_certificate_path_public }} -extensions v3_ca
   args:
