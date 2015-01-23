@@ -2,9 +2,10 @@
 ssl_certificate_self_signed: yes
 ssl_certificate_public_contents: ''
 ssl_certificate_private_contents: ''
-ssl_certificate_path_public: /data/www/ssl.crt
-ssl_certificate_path_private: /data/www/ssl.key
-ssl_certificate_path_combined: /data/www/ssl.combined
+ssl_certificate_path: /data/www/
+ssl_certificate_path_public: "{{ ssl_certificate_path }}ssl.crt"
+ssl_certificate_path_private: "{{ ssl_certificate_path }}ssl.key"
+ssl_certificate_path_combined: "{{ ssl_certificate_path }}ssl.combined"
 ssl_certificate_common_name: "{{ ansible_fqdn }}"
 ssl_certificate_owner: www-data
 ssl_certificate_group: www-data
