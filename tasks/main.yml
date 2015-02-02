@@ -1,5 +1,4 @@
 ---
-
 - name: "Create Directory | {{ ssl_certificate_path }}"
   file:
     path: "{{ ssl_certificate_path }}"
