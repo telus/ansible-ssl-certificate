@@ -1,5 +1,16 @@
 ---
 dependencies:
   - role: meta/repository
-    repository_key: '0xaec75ad1d1e5d3d2'
-    repository_url: 'deb http://ppa.launchpad.net/mizuno-as/silversearcher-ag/ubuntu trusty main'
+    repository_key: "0xaec75ad1d1e5d3d2"
+    repository_url: "deb http://ppa.launchpad.net/mizuno-as/silversearcher-ag/ubuntu {{ ansible_distribution_release }} main"
+galaxy_info:
+  author: "Chris Olstrom"
+  company: "TELUS digital"
+  description: "The Silver Searcher - A code searching tool similar to ack, with a focus on speed."
+  license: MIT
+  platforms:
+    - name: Ubuntu
+      versions:
+      - trusty
+  categories:
+    - development
