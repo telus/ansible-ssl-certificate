@@ -2,8 +2,10 @@
 - name: "Create Directory | {{ ssl_certificate_path }}"
   file:
     path: "{{ ssl_certificate_path }}"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
     state: directory
-    mode: 0440
+    mode: 0755
   tags:
     - ssl-certificate
 
