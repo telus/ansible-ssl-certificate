@@ -1,0 +1,51 @@
+---
+- name: "Create Directory | {{ ssl_certificate_path }}"
+  file:
+    path: "{{ ssl_certificate_path }}"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+    state: directory
+    mode: 0755
+  tags:
+    - ssl-certificate
+
+- name: Generate Self-Signed Certificate
+  command: "openssl req -new -nodes -x509 -subj \"/C=CA/ST=BC/L=Vancouver/O=TELUS/CN={{ ssl_certificate_common_name }}\" -days 3650 -keyout {{ ssl_certificate_path_private }} -out {{ ssl_certificate_path_public }} -extensions v3_ca"
+  args:
+    creates: "{{ ssl_certificate_path_public }}"
+  when: ssl_certificate_self_signed
+  tags:
+    - ssl-certificate
+
+- name: Upload Public Certificate
+  template:
+    src: template.certificate
+    dest: "{{ ssl_certificate_path_public }}"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+    mode: 0440
+  when: ssl_certificate_public_contents or ssl_certificate_contents
+  tags:
+    - ssl-certificate
+
+- name: Upload Private Key
+  template:
+    src: template.key
+    dest: "{{ ssl_certificate_path_private }}"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+    mode: 0440
+  when: ssl_certificate_private_contents or ssl_certificate_contents
+  tags:
+    - ssl-certificate
+
+- name: Upload Combined Public/Private Key
+  template:
+    src: template.combined
+    dest: "{{ ssl_certificate_path_combined }}"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+    mode: 0440
+  when: ssl_certificate_combined
+  tags:
+    - ssl-certificate
