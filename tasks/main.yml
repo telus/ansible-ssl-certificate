@@ -46,7 +46,7 @@
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
     mode: 0440
-  when: ssl_certificate_combined and !ssl_certificate_self_signed
+  when: ssl_certificate_combined and not ssl_certificate_self_signed
   tags:
     - ssl-certificate
 
