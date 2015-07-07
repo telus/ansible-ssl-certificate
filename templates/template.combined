@@ -1,7 +1,9 @@
 {% if ssl_certificate_contents %}
 {{ ssl_certificate_contents[ssl_certificate_name]['public'] }}
 {{ ssl_certificate_contents[ssl_certificate_name]['private'] }}
+a
 {% else %}
 {{ ssl_certificate_public_contents }}
 {{ ssl_certificate_private_contents }}
+b
 {% endif %}
