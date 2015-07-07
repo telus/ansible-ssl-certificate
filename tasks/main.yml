@@ -14,6 +14,7 @@
   args:
     creates: "{{ ssl_certificate_path_public }}"
   when: ssl_certificate_self_signed
+  notify: Upload Combined Public/Private Key (Self-Signed)
   tags:
     - ssl-certificate
 
@@ -47,13 +48,5 @@
     group: "{{ ssl_certificate_group }}"
     mode: 0440
   when: ssl_certificate_combined and not ssl_certificate_self_signed
-  tags:
-    - ssl-certificate
-
-- name: Upload Combined Public/Private Key (Self-Signed)
-  command: "cat {{ ssl_certificate_path_private }} > {{ ssl_certificate_path_combined }} && cat {{ ssl_certificate_path_public }} >> {{ ssl_certificate_path_combined }}"
-#    src: template.combined
-#    mode: 0440
-  when: ssl_certificate_combined and ssl_certificate_self_signed
   tags:
     - ssl-certificate
