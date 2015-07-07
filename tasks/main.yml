@@ -17,17 +17,6 @@
   tags:
     - ssl-certificate
 
-- name: Upload Combined Public/Private Key
-  template:
-    src: template.combined
-    dest: "{{ ssl_certificate_path_combined }}"
-    owner: "{{ ssl_certificate_owner }}"
-    group: "{{ ssl_certificate_group }}"
-    mode: 0440
-  when: ssl_certificate_combined
-  tags:
-    - ssl-certificate
-
 - name: Upload Public Certificate
   template:
     src: template.certificate
@@ -47,5 +36,16 @@
     group: "{{ ssl_certificate_group }}"
     mode: 0440
   when: ssl_certificate_private_contents or ssl_certificate_contents
+  tags:
+    - ssl-certificate
+
+- name: Upload Combined Public/Private Key
+  template:
+    src: template.combined
+    dest: "{{ ssl_certificate_path_combined }}"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+    mode: 0440
+  when: ssl_certificate_combined
   tags:
     - ssl-certificate
