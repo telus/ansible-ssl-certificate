@@ -1,14 +1,18 @@
 ---
-ssl_certificate_self_signed: yes
-ssl_certificate_public_contents: ''
-ssl_certificate_private_contents: ''
-ssl_certificate_contents: {}
+ssl_certificate_owner: root
+ssl_certificate_group: staff
+
 ssl_certificate_name: ssl
 ssl_certificate_path: /data/www
 ssl_certificate_path_public: "{{ ssl_certificate_path }}/{{ ssl_certificate_name }}.crt"
 ssl_certificate_path_private: "{{ ssl_certificate_path }}/{{ ssl_certificate_name }}.key"
 ssl_certificate_path_combined: "{{ ssl_certificate_path }}/{{ ssl_certificate_name }}.combined"
-ssl_certificate_common_name: "{{ ansible_fqdn }}"
-ssl_certificate_owner: www-data
-ssl_certificate_group: www-data
 ssl_certificate_combined: no
+
+ssl_certificate_self_signed: no
+ssl_certificate_self_signed_common_name: "{{ ansible_fqdn }}"
+
+ssl_certificate_public_contents: ''
+ssl_certificate_private_contents: ''
+
+ssl_certificate_contents: {}
