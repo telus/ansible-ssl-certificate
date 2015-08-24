@@ -25,7 +25,7 @@
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
     mode: 0440
-  when: ssl_certificate_contents[ssl_certificate_name]['public'] != ""
+  when: ssl_certificate_contents[ssl_certificate_name]['public']
   tags:
     - ssl-certificate
 
