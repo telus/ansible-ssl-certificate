@@ -16,6 +16,6 @@ ssl_certificate_public_contents: ''
 ssl_certificate_private_contents: ''
 
 ssl_certificate_contents:
-  ssl_certificate_self_signed_common_name: "{{ ssl_certificate_self_signed_common_name }}"
+  ssl_certificate_name: "{{ ssl_certificate_self_signed_common_name }}"
     private: "{{ ssl_certificate_private_contents }}"
     public: "{{ ssl_certificate_public_contents }}"
