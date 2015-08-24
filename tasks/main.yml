@@ -13,7 +13,7 @@
   command: "openssl req -new -nodes -x509 -subj \"/C=CA/ST=BC/L=Vancouver/O=TELUS/CN={{ ssl_certificate_self_signed_common_name }}\" -days 3650 -keyout {{ ssl_certificate_path_private }} -out {{ ssl_certificate_path_public }} -extensions v3_ca"
   args:
     creates: "{{ ssl_certificate_path_public }}"
-  when: ssl_certificate_self_signed
+  when: ssl_certificate_self_signed | bool
   notify: Upload Combined Public/Private Key (Self-Signed)
   tags:
     - ssl-certificate
