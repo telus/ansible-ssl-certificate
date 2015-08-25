@@ -25,7 +25,7 @@
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
     mode: 0440
-  when: ssl_certificate_contents[ssl_certificate_name]['public']
+  when: not ssl_certificate_self_signed
   tags:
     - ssl-certificate
 
@@ -36,7 +36,7 @@
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
     mode: 0440
-  when: ssl_certificate_contents[ssl_certificate_name]['private']
+  when: not ssl_certificate_self_signed
   tags:
     - ssl-certificate
 
