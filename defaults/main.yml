@@ -12,6 +12,11 @@ ssl_certificate_combined: no
 ssl_certificate_self_signed: yes
 ssl_certificate_self_signed_common_name: "{{ ansible_fqdn }}"
 
+ssl_certificate_self_options: "rsa:4096 -sha256 -nodes"
+ssl_certificate_self_age: 3650
+
+ssl_certificate_self_subject: "/C=CA/ST=BC/L=Vancouver/O=TELUS/CN={{ ssl_certificate_self_signed_common_name }}"
+
 ssl_certificate_public_contents: ''
 ssl_certificate_private_contents: ''
 
