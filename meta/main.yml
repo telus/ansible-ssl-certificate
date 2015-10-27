@@ -10,3 +10,8 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - all
+    - name: RedHat
+      versions:
+        - all
+dependencies: []
+
