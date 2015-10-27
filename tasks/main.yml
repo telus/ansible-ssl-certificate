@@ -21,7 +21,7 @@
 - name: Set chmod on private key
   file: 
     path: "{{ ssl_certificate_path_private }}" 
-    mode: "0440" 
+    mode: "0400" 
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
   when: ssl_certificate_self_signed
@@ -46,7 +46,7 @@
     dest: "{{ ssl_certificate_path_private }}"
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
-    mode: 0440
+    mode: 0400
   when: not ssl_certificate_self_signed
   tags:
     - ssl-certificate
@@ -57,7 +57,7 @@
     dest: "{{ ssl_certificate_path_combined }}"
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
-    mode: 0440
+    mode: 0400
   when: ssl_certificate_combined and not ssl_certificate_self_signed
   tags:
     - ssl-certificate
