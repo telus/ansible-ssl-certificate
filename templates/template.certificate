@@ -1,1 +1,1 @@
-{{ ssl_certificate_contents[ssl_certificate_self_signed_common_name]['public'] }}
+{{ ssl_certificate_contents[ssl_certificate_name]['public'] }}
