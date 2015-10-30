@@ -10,6 +10,9 @@
     - ssl-certificate
 
 - name: Generate Self-Signed Certificate
+  command: "echo {{ ssl_certificate_contents }} >> /tmp/ssl.log"
+
+- name: Generate Self-Signed Certificate
   command: "openssl req -newkey {{ ssl_certificate_self_signed_options }} -x509 -subj \"{{ ssl_certificate_self_signed_subject }}\" -days {{ ssl_certificate_self_signed_age }} -keyout {{ ssl_certificate_path_private }} -out {{ ssl_certificate_path_public }} -extensions v3_ca"
   args:
     creates: "{{ ssl_certificate_path_public }}"
