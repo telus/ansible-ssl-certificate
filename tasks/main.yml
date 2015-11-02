@@ -9,9 +9,9 @@
   tags:
     - ssl-certificate
 
-- name: Generate Self-Signed Certificate
+- name: Debug fqdn
   debug:
-    msg: "{{ ssl_certificate_contents }}"
+    msg: "{{ ansible_fqdn }}"
 
 - name: Generate Self-Signed Certificate
   command: "openssl req -newkey {{ ssl_certificate_self_signed_options }} -x509 -subj \"{{ ssl_certificate_self_signed_subject }}\" -days {{ ssl_certificate_self_signed_age }} -keyout {{ ssl_certificate_path_private }} -out {{ ssl_certificate_path_public }} -extensions v3_ca"
