@@ -1,5 +1,6 @@
 # ansible-ssl-certificate
 
+[![Build Status](https://travis-ci.org/telusdigital/ansible-ssl-certificate.svg?branch=master)](https://travis-ci.org/telusdigital/ansible-ssl-certificate)
 [![Platforms](http://img.shields.io/badge/platforms-ubuntu-lightgrey.svg?style=flat)](#)
 
 Tunables
