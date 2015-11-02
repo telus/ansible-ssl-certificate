@@ -18,6 +18,7 @@ Tunables
 * `ssl_certificate_public_contents` (string) - The SSL certificate public key contents.
 * `ssl_certificate_private_contents` (string) - The SSL certificate private key contents.
 * `ssl_certificate_contents` (dictionary) - For SNI lookup. The private and public keys files for multiple domains.
+* `ssl_certificate_self_signed_options` (string) - Command line arguments for use in self signed certificates.
 
 
 Example Playbook
