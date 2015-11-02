@@ -19,7 +19,6 @@ Tunables
 * `ssl_certificate_private_contents` (string) - The SSL certificate private key contents.
 * `ssl_certificate_contents` (dictionary) - For SNI lookup. The private and public keys files for multiple domains.
 
-
 Example Playbook
 ----------------
     - hosts: servers

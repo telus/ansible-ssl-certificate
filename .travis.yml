@@ -31,3 +31,4 @@ script:
 
   # check self signed is there
   - cat /data/www/ssl.crt
+
