@@ -1,6 +1,6 @@
 ---
 - name: Upload Combined Public/Private Key (Self-Signed)
-  shell: "cat {{ ssl_certificate_path_private }} > {{ ssl_certificate_path_combined }} && cat {{ ssl_certificate_path_public }} >> {{ ssl_certificate_path_combined }}"
+  shell: "cat {{ ssl_certificate_path_private }} > {{ ssl_certificate_path_combined }} && cat {{ ssl_certificate_path_public }} >> {{ ssl_certificate_path_combined }} && chmod 0400 {{ ssl_certificate_path_combined }}"
   when: ssl_certificate_combined | bool and ssl_certificate_self_signed | bool
   tags:
     - ssl-certificate

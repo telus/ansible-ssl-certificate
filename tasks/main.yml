@@ -10,10 +10,14 @@
     - ssl-certificate
 
 - name: Generate Self-Signed Certificate
-  command: "openssl req -newkey {{ ssl_certificate_self_options }} -x509 -subj \"{{ ssl_certificate_self_subject }}\" -days {{ ssl_certificate_self_age }} -keyout {{ ssl_certificate_path_private }} -out {{ ssl_certificate_path_public }} -extensions v3_ca"
+  debug:
+    msg: "{{ ssl_certificate_contents }}"
+
+- name: Generate Self-Signed Certificate
+  command: "openssl req -newkey {{ ssl_certificate_self_signed_options }} -keyout {{ ssl_certificate_path_private }} -out {{ ssl_certificate_path_public }} -extensions v3_ca"
   args:
     creates: "{{ ssl_certificate_path_public }}"
-  when: ssl_certificate_self_signed
+  when: ssl_certificate_self_signed | bool
   notify: Upload Combined Public/Private Key (Self-Signed)
   tags:
     - ssl-certificate
@@ -21,10 +25,10 @@
 - name: Set chmod on private key
   file: 
     path: "{{ ssl_certificate_path_private }}" 
-    mode: "0440" 
+    mode: "0400" 
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
-  when: ssl_certificate_self_signed
+  when: ssl_certificate_self_signed | bool
   notify: Upload Combined Public/Private Key (Self-Signed)
   tags:
     - ssl-certificate
@@ -36,7 +40,7 @@
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
     mode: 0440
-  when: not ssl_certificate_self_signed
+  when: not ssl_certificate_self_signed | bool
   tags:
     - ssl-certificate
 
@@ -46,8 +50,8 @@
     dest: "{{ ssl_certificate_path_private }}"
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
-    mode: 0440
-  when: not ssl_certificate_self_signed
+    mode: 0400
+  when: not ssl_certificate_self_signed | bool
   tags:
     - ssl-certificate
 
@@ -57,7 +61,7 @@
     dest: "{{ ssl_certificate_path_combined }}"
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
-    mode: 0440
-  when: ssl_certificate_combined and not ssl_certificate_self_signed
+    mode: 0400
+  when: ssl_certificate_combined and not ssl_certificate_self_signed | bool
   tags:
     - ssl-certificate
