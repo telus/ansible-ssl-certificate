@@ -16,6 +16,9 @@ install:
   # configure ansible
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
 
+  # install dependencies from meta/main.yml
+  - "read dependencies < <(cat meta/main.yml  | grep 'role:' | awk '{print $3}' | tr '\n' ' '); ansible-galaxy install $dependencies"
+
 script:
   # check syntax
   - "ansible-playbook -i tests/inventory tests/$PLAYBOOK --syntax-check"
@@ -25,3 +28,6 @@ script:
 
   # check idempotence
   - "ansible-playbook -i tests/inventory tests/$PLAYBOOK --connection=local --sudo"
+
+  # check self signed is there
+  - cat /data/www/ssl.crt
