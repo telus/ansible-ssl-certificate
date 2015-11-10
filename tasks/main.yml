@@ -9,23 +9,23 @@
   tags:
     - ssl-certificate
 
-- name: Generate Self-Signed Certificate
-  debug:
-    msg: "{{ ssl_certificate_contents }}"
+# - name: Generate Self-Signed Certificate
+#   debug:
+#     msg: "{{ ssl_certificate_contents }}"
 
-- name: Generate Self-Signed Certificate
-  command: "openssl req -newkey {{ ssl_certificate_self_signed_options }} -keyout {{ ssl_certificate_path_private }} -out {{ ssl_certificate_path_public }} -extensions v3_ca"
-  args:
-    creates: "{{ ssl_certificate_path_public }}"
-  when: ssl_certificate_self_signed | bool
-  notify: Upload Combined Public/Private Key (Self-Signed)
-  tags:
-    - ssl-certificate
+# - name: Generate Self-Signed Certificate
+#   command: "openssl req -newkey {{ ssl_certificate_self_signed_options }} -keyout {{ ssl_certificate_path_private }} -out {{ ssl_certificate_path_public }} -extensions v3_ca"
+#   args:
+#     creates: "{{ ssl_certificate_path_public }}"
+#   when: ssl_certificate_self_signed | bool
+#   notify: Upload Combined Public/Private Key (Self-Signed)
+#   tags:
+#     - ssl-certificate
 
 - name: Set chmod on private key
-  file: 
-    path: "{{ ssl_certificate_path_private }}" 
-    mode: "0400" 
+  file:
+    path: "{{ ssl_certificate_path_private }}"
+    mode: "0400"
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
   when: ssl_certificate_self_signed | bool
