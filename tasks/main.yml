@@ -22,16 +22,16 @@
 #   tags:
 #     - ssl-certificate
 
-- name: Set chmod on private key
-  file:
-    path: "{{ ssl_certificate_path_private }}"
-    mode: "0400"
-    owner: "{{ ssl_certificate_owner }}"
-    group: "{{ ssl_certificate_group }}"
-  when: ssl_certificate_self_signed | bool
-  notify: Upload Combined Public/Private Key (Self-Signed)
-  tags:
-    - ssl-certificate
+# - name: Set chmod on private key
+#   file:
+#     path: "{{ ssl_certificate_path_private }}"
+#     mode: "0400"
+#     owner: "{{ ssl_certificate_owner }}"
+#     group: "{{ ssl_certificate_group }}"
+#   when: ssl_certificate_self_signed | bool
+#   notify: Upload Combined Public/Private Key (Self-Signed)
+#   tags:
+#     - ssl-certificate
 
 - name: Upload Public Certificate
   template:
@@ -40,7 +40,7 @@
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
     mode: 0440
-  when: not ssl_certificate_self_signed | bool
+  # when: not ssl_certificate_self_signed | bool
   tags:
     - ssl-certificate
 
@@ -51,7 +51,7 @@
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
     mode: 0400
-  when: not ssl_certificate_self_signed | bool
+  # when: not ssl_certificate_self_signed | bool
   tags:
     - ssl-certificate
 
