@@ -1,34 +1,9 @@
----
 sudo: required
-dist: trusty
-language: generic
-
-env:
-  - PLAYBOOK=test.yml
-
-before_install:
-  - sudo apt-get update -qq
-
+services: docker
 install:
-  # install ansible
-  - sudo pip install ansible
-
-  # configure ansible
-  - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
-
-  # install dependencies from meta/main.yml
-  - "read dependencies < <(cat meta/main.yml  | grep 'role:' | awk '{print $3}' | tr '\n' ' '); ansible-galaxy install $dependencies"
-
+- bundle install
 script:
-  # check syntax
-  - "ansible-playbook -i tests/inventory tests/$PLAYBOOK --syntax-check"
-
-  # initial run
-  - "ansible-playbook -i tests/inventory tests/$PLAYBOOK --connection=local --sudo"
-
-  # check idempotence
-  - "ansible-playbook -i tests/inventory tests/$PLAYBOOK --connection=local --sudo"
-
-  # check self signed is there
-  - cat /data/www/ssl.crt
-
+- bundle exec kitchen test
+notifications:
+  slack:
+    secure: fKWS6q/P2TK34gawGqvJ6wuDghIrneLlGSjPR+LPYRkSK6jd+8zeVIaHPQxr6jtlla3pyIhI+AjHVWqaSQ2dHJj9/JAAzqrTVQ7sFlgLhRkS6Pl42wsYp6m6MeLmh7cCBMSW766gGZqn/x47/rIKOzI4qVGdwQUayP+wkg4k+ncIIlZ7BUi1If8i80Kw9gLmgCODmI3YZOhXTbu2JR8YA6Egj5ex1nNDRfBn4RQwqHdH3zNlir/bty5Qat9feICBQ9nSxwa7YqMFJt3uHzB4n5+dS01HsKfDy8TDzMEGr2VmN1hoUTVwaM8UkbdKMvEBmwwAi1NZKN/KGuQFNMA7255Osv1tEO1A/KmSNK5clc+BMGtLN0baakRUXXX7H0Iz7uSsob33mWJtRpYcunvl8fEp0jqsST9Pt/C7Vlye5MH8qN7EtI+EStSvQCPLM9QZ+6s65/Njr2sz5+ZAfuCbNxUx1gjF/2G7aQzEuT0ZSVsmhFhc4ziZ+DcLylZ1cxjaPRfD1J+JeybKZ19qmcQoCaEOur5MsDO324h3DK7qX5f66zb+0nVU6D+25vSJtDs8v/xpEgaISSV1uZfR3NaeyKdDQLsh4XuXI8gk8PU7TzYvDtyfw8ZeKf3znWfHU0ed0PsUsDVU2JdEoxMuOnRE7uj/2jDe9r1T9HEWloOVUMc=
