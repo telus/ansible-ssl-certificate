@@ -14,7 +14,7 @@ Tunables
 * `ssl_certificate_path_private` (string) - The path to put private SSL certificates.
 * `ssl_certificate_path_combined` (string) -  The path to put combined SSL certificates.
 * `ssl_certificate_combined` (boolean) - Should the SSL public and private cert be combined?
-* `ssl_certificate_self_signed` (boolean) - Should the certificate be self signed? 
+* `ssl_certificate_self_signed` (boolean) - Should the certificate be self signed?
 * `ssl_certificate_common_name` (string) - The common name to be used for self signed certificates.
 * `ssl_certificate_public_contents` (string) - The SSL certificate public key contents.
 * `ssl_certificate_private_contents` (string) - The SSL certificate private key contents.
@@ -37,3 +37,4 @@ Contributors
 * Steven Harradine
 * Aaron Pederson
 * Ben Visser
+* Nikki
