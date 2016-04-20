@@ -1,2 +1,25 @@
 ---
-silversearcher_emacs_integration: no
+ssl_certificate_owner: root
+ssl_certificate_group: staff
+
+ssl_certificate_name: ssl
+ssl_certificate_path: /data/www
+ssl_certificate_path_public: "{{ ssl_certificate_path }}/{{ ssl_certificate_name }}.crt"
+ssl_certificate_path_private: "{{ ssl_certificate_path }}/{{ ssl_certificate_name }}.key"
+ssl_certificate_path_combined: "{{ ssl_certificate_path }}/{{ ssl_certificate_name }}.combined"
+ssl_certificate_combined: no
+
+ssl_certificate_self_signed: yes
+ssl_certificate_self_signed_common_name: "{{ ansible_fqdn }}"
+
+ssl_certificate_self_signed_age: 3650
+ssl_certificate_self_signed_subject: "/C=CA/ST=BC/L=Vancouver/O=TELUS/CN={{ ssl_certificate_self_signed_common_name }}"
+ssl_certificate_self_signed_options: "rsa:4096 -sha256 -nodes -x509 -subj \"{{ ssl_certificate_self_signed_subject }}\" -days {{ ssl_certificate_self_signed_age }}"
+
+ssl_certificate_public_contents: ''
+ssl_certificate_private_contents: ''
+
+ssl_certificate_contents:
+  ssl:
+    private: "{{ ssl_certificate_private_contents }}"
+    public: "{{ ssl_certificate_public_contents }}"

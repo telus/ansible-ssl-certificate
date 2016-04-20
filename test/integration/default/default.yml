@@ -1,0 +1,11 @@
+---
+# host to test against
+- hosts: test-kitchen
+  remote_user: root
+
+  roles:
+    # name of role to test
+    - role: ansible-ssl-certificate
+
+      # explicity defining here since travis boxes have unusually large fqdns
+      ssl_certificate_self_signed_common_name: travis

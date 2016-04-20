@@ -1,16 +1,16 @@
 ---
-dependencies:
-  - role: telusdigital.apt-repository
-    repository_key: "0xaec75ad1d1e5d3d2"
-    repository_url: "deb http://ppa.launchpad.net/mizuno-as/silversearcher-ag/ubuntu {{ ansible_distribution_release }} main"
 galaxy_info:
   author: "Chris Olstrom"
-  company: "TELUS digital"
-  description: "The Silver Searcher - A code searching tool similar to ack, with a focus on speed."
-  license: MIT
+  categories:
+    - system
+  description: "Generates SSL certificates"
+  license: MIT License
+  min_ansible_version: 1.2
   platforms:
     - name: Ubuntu
       versions:
-      - trusty
-  categories:
-    - development
+        - all
+    - name: RedHat
+      versions:
+        - all
+dependencies: []

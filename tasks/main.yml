@@ -1,16 +1,63 @@
 ---
-- name: Install Packages | apt
-  apt:
-    state: latest
-    pkg: "{{ item }}"
-  with_items:
-    - silversearcher-ag
+- name: "Create Directory | {{ ssl_certificate_path }}"
+  file:
+    path: "{{ ssl_certificate_path }}"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+    state: directory
+    mode: 0755
+  tags:
+    - ssl-certificate
 
-- name: Install Packages | apt
-  apt:
-    state: latest
-    pkg: "{{ item }}"
-  with_items:
-    - emacs24-nox
-    - silversearcher-ag-el
-  when: silversearcher_emacs_integration
+- name: Generate Self-Signed Certificate
+  command: "openssl req -newkey {{ ssl_certificate_self_signed_options }} -keyout {{ ssl_certificate_path_private }} -out {{ ssl_certificate_path_public }} -extensions v3_ca"
+  args:
+    creates: "{{ ssl_certificate_path_public }}"
+  when: ssl_certificate_self_signed | bool
+  notify: Upload Combined Public/Private Key (Self-Signed)
+  tags:
+    - ssl-certificate
+
+- name: Set chmod on private key
+  file:
+    path: "{{ ssl_certificate_path_private }}"
+    mode: "0400"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+  when: ssl_certificate_self_signed | bool
+  notify: Upload Combined Public/Private Key (Self-Signed)
+  tags:
+    - ssl-certificate
+
+- name: Upload Public Certificate
+  template:
+    src: template.certificate
+    dest: "{{ ssl_certificate_path_public }}"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+    mode: 0440
+  when: not ssl_certificate_self_signed | bool
+  tags:
+    - ssl-certificate
+
+- name: Upload Private Key
+  template:
+    src: template.key
+    dest: "{{ ssl_certificate_path_private }}"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+    mode: 0400
+  when: not ssl_certificate_self_signed | bool
+  tags:
+    - ssl-certificate
+
+- name: Upload Combined Public/Private Key (not Self-Signed)
+  template:
+    src: template.combined
+    dest: "{{ ssl_certificate_path_combined }}"
+    owner: "{{ ssl_certificate_owner }}"
+    group: "{{ ssl_certificate_group }}"
+    mode: 0400
+  when: ssl_certificate_combined and not ssl_certificate_self_signed | bool
+  tags:
+    - ssl-certificate
