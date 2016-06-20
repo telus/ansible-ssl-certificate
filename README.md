@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-# ansible-silversearcher
-
-[The Silver Searcher](https://github.com/ggreer/the_silver_searcher) - A code searching tool similar to ack, with a focus on speed.
-
-=======
 # ansible-ssl-certificate
 
 [![Build Status](https://travis-ci.org/telusdigital/ansible-ssl-certificate.svg?branch=master)](https://travis-ci.org/telusdigital/ansible-ssl-certificate)
@@ -26,7 +20,6 @@ Tunables
 * `ssl_certificate_private_contents` (string) - The SSL certificate private key contents.
 * `ssl_certificate_contents` (dictionary) - For SNI lookup. The private and public keys files for multiple domains.
 * `ssl_certificate_self_signed_options` (string) - Command line arguments for use in self signed certificates.
->>>>>>> 8fa628cf3de52995cd0ae9a881f06f3447376128
 
 Example Playbook
 ----------------
