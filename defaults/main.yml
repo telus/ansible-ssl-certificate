@@ -9,7 +9,7 @@ ssl_certificate_path_private: "{{ ssl_certificate_path }}/{{ ssl_certificate_nam
 ssl_certificate_path_combined: "{{ ssl_certificate_path }}/{{ ssl_certificate_name }}.combined"
 ssl_certificate_combined: no
 
-ssl_certificate_self_signed: yes
+ssl_certificate_self_signed: no
 ssl_certificate_self_signed_common_name: "{{ ansible_fqdn }}"
 
 ssl_certificate_self_signed_age: 3650
