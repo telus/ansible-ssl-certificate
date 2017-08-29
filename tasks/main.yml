@@ -51,13 +51,13 @@
   tags:
     - ssl-certificate
 
-- name: Upload Combined Public/Private Key (not Self-Signed)
+- name: Upload Combined Public/Private Key
   template:
     src: template.combined
     dest: "{{ ssl_certificate_path_combined }}"
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
     mode: 0400
-  when: ssl_certificate_combined and not ssl_certificate_self_signed | bool
+  when: ssl_certificate_combined or ssl_certificate_self_signed | bool
   tags:
     - ssl-certificate
