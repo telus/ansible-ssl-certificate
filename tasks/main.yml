@@ -51,7 +51,7 @@
   tags:
     - ssl-certificate
 
-- name: Upload Combined Public/Private Key (not Self-Signed)
+- name: Upload Combined Public/Private Key
   template:
     src: template.combined
     dest: "{{ ssl_certificate_path_combined }}"
