@@ -58,6 +58,6 @@
     owner: "{{ ssl_certificate_owner }}"
     group: "{{ ssl_certificate_group }}"
     mode: 0400
-  when: ssl_certificate_combined and not ssl_certificate_self_signed | bool
+  when: ssl_certificate_combined or ssl_certificate_self_signed | bool
   tags:
     - ssl-certificate
